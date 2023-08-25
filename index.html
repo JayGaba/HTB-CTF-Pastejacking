@@ -126,12 +126,12 @@
     <script>
         document.getElementById("captcha").addEventListener("paste", async function (e) {
         e.preventDefault();
-        alert("Flag: HTB{ }");
-
+        
+        
         try {
-            // const response = await fetch('/.netlify/functions/get-flag');
-            // const data = await response.json();
-
+            const response = await fetch('/.netlify/functions/get-flag');
+            const data = await response.json();
+            
             alert(`Flag: ${data.flag}`);
         } catch (error) {
             console.error(error);
