@@ -1,15 +1,11 @@
 exports.handler = async (event, context) => {
-    // Authenticate the user using Netlify Identity
-    const user = context.clientContext && context.clientContext.user;
+    return {
+        statusCode: 200,
+        body: JSON.stringify({ message: "hmmmmmmmmm" }),
+    };
+};
 
-    // Check if the user is authenticated and has a specific role
-    if (!user) {
-        return {
-            statusCode: 403,
-            body: JSON.stringify({ error: "haha not so easy" }),
-        };
-    }
-
+exports.getFlag = async (event, context) => {
     const flag = process.env.FLAG_SECRET;
     if (!flag) {
         return {
@@ -18,8 +14,16 @@ exports.handler = async (event, context) => {
         };
     }
 
-    return {
-    statusCode: 200,
-    body: JSON.stringify({ flag }),
-};
+    const requestBody = JSON.parse(event.body);
+    if (requestBody.paste === flag) {
+        return {
+            statusCode: 200,
+            body: JSON.stringify({ flag }),
+        };
+    } else {
+        return {
+            statusCode: 403,
+            body: JSON.stringify({ error: "Incorrect input" }),
+        };
+    }
 };
