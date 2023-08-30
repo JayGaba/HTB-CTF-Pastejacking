@@ -1,5 +1,4 @@
 exports.handler = async (event, context) => {
-    console.log('Function called');
     // Authenticate the user using Netlify Identity
     const user = context.clientContext && context.clientContext.user;
 
@@ -19,7 +18,6 @@ exports.handler = async (event, context) => {
         };
     }
 
-    console.log('FLAG_SECRET:', flag);
     return {
     statusCode: 200,
     body: JSON.stringify({ flag }),
