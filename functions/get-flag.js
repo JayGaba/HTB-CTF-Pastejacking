@@ -6,7 +6,7 @@ exports.handler = async (event, context) => {
     if (!user || !user.app_metadata || user.app_metadata.roles.indexOf('admin') === -1) {
         return {
             statusCode: 403,
-            body: JSON.stringify({ error: "Unauthorized" }),
+            body: JSON.stringify({ error: "haha not so easy" }),
         };
     }
 
