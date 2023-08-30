@@ -3,7 +3,7 @@ exports.handler = async (event, context) => {
     const user = context.clientContext && context.clientContext.user;
 
     // Check if the user is authenticated and has a specific role
-    if (!user || !user.app_metadata || user.app_metadata.roles.indexOf('admin') === -1) {
+    if (!user) {
         return {
             statusCode: 403,
             body: JSON.stringify({ error: "haha not so easy" }),
