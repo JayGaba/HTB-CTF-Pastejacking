@@ -123,21 +123,28 @@
     <p id="small-text">Tesler Mott</p>
 
     <script>
-        document.getElementById("captcha").addEventListener("paste", async function (e) {
-        e.preventDefault();
-        
-        
-        try {
-            const response = await fetch('/.netlify/functions/get-flag');
-            const data = await response.json();
-            
-            alert(`Flag: ${data.flag}`);
-        } catch (error) {
-            console.error(error);
-        }
+document.getElementById("captcha").addEventListener("paste", async function (e) {
+    e.preventDefault();
 
-        document.getElementById("captcha").value = "";
-    });
+    try {
+        const response = await fetch('/.netlify/functions/get-flag', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            body: JSON.stringify({ from: 'pasteEvent' })
+        });
+        const data = await response.json();
+
+        alert(`Flag: ${data.flag}`);
+    } catch (error) {
+        console.error(error);
+    }
+
+    document.getElementById("captcha").value = "";
+});
+
 
     function checkForm() {
         const name = document.getElementById("name").value;
