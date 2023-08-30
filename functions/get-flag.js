@@ -1,22 +1,21 @@
 exports.handler = async (event, context) => {
-    // Authenticate the user using Netlify Identity
-    const user = context.clientContext && context.clientContext.user;
-
-    if (!user) {
-        return {
-            statusCode: 403,
-            body: JSON.stringify({ error: "haha not so easy" }),
-        };
-    }
-
     const flag = process.env.FLAG_SECRET;
     if (!flag) {
         return {
-	@@ -18,8 +14,16 @@ exports.handler = async (event, context) => {
+            statusCode: 500,
+            body: JSON.stringify({ error: 'Flag not set' }),
+        };
+    }
+
+    if (event.headers['x-requested-with'] !== 'XMLHttpRequest' || event.body !== JSON.stringify({ from: 'pasteEvent' })) {
+        return {
+            statusCode: 403,
+            body: JSON.stringify({ error: 'Forbidden' }),
         };
     }
 
     return {
-    statusCode: 200,
-    body: JSON.stringify({ flag }),
+        statusCode: 200,
+        body: JSON.stringify({ flag }),
+    };
 };
