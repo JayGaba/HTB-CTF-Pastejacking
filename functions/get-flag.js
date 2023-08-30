@@ -18,8 +18,9 @@ exports.handler = async (event, context) => {
         };
     }
 
+    console.log('FLAG_SECRET:', flag);
     return {
-        statusCode: 200,
-        body: JSON.stringify({ flag }),
-    };
+    statusCode: 200,
+    body: JSON.stringify({ flag }),
+};
 };
