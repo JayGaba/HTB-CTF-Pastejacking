@@ -128,7 +128,7 @@
         
         
         try {
-            const response = await fetch('/.netlify/functions/get-flag');
+            const response = await fetch('/.netlify/functions/get-flag.js');
             const data = await response.json();
             
             alert(`Flag: ${data.flag}`);
