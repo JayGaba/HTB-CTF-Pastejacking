@@ -10,7 +10,7 @@ exports.handler = async (event, context) => {
     if (event.headers['x-requested-with'] !== 'XMLHttpRequest' || event.body !== JSON.stringify({ from: 'pasteEvent' })) {
         return {
             statusCode: 403,
-            body: JSON.stringify({ error: 'Forbidden' }),
+            body: JSON.stringify({ error: 'haha not so easy' }),
         };
     }
 
